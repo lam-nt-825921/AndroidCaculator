@@ -71,7 +71,7 @@ class CalculateViewModel : ViewModel() {
         }
 
         if (isCalculated.value) {
-            historyText.value += "\n${expressionText.value} \n= ${resultText.value}"
+            historyText.value += "\n${expressionText.value} \n= ${resultText.value}\n"
             if (digit == ".") expressionText.value = "0."
             else expressionText.value = digit
             resultText.value = "0"

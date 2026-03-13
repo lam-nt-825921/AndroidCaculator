@@ -4,8 +4,10 @@ import viewModels.CalculateViewModel
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,9 +22,11 @@ import androidx.compose.ui.unit.sp
 object CalcDisplayThemes {
     val Background = Color.Black
     val PrimaryText = Color.White
-    val PrimaryFontSize = 32.sp
+    val PrimaryFontSize = 42.sp
     val SecondaryText = Color(0xFFA6A6A6)
-    val SecondaryFontSize = 24.sp
+    val SecondaryFontSize = 32.sp
+
+    val HistoriesFontSize = 24.sp
 }
 
 data class CalcTextTheme(
@@ -72,9 +76,10 @@ fun CalcDisplay(
             Text(
                 text = viewModel.historyText.value,
                 color = CalcDisplayThemes.SecondaryText,
-                fontSize = CalcDisplayThemes.SecondaryFontSize
+                fontSize = CalcDisplayThemes.HistoriesFontSize
             )
         }
+        Spacer(modifier = Modifier.height(50.dp))
         Box(
             modifier = Modifier
                 .weight(2f)
@@ -90,8 +95,12 @@ fun CalcDisplay(
                     color = calcExpression.color,
                     fontSize = calcExpression.fontSize
                 )
+                var txt = viewModel.resultText.value
+                if (viewModel.isCalculated.value) {
+                    txt = "= $txt"
+                }
                 Text(
-                    text = viewModel.resultText.value,
+                    text = txt,
                     color = calcResult.color,
                     fontSize = calcResult.fontSize
                 )
